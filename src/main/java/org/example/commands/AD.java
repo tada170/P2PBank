@@ -5,13 +5,16 @@ import org.example.AccountHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.example.Client.connectAndSendMessage;
 import static org.example.util.CommandUtils.*;
 
 public class AD implements Command {
     private final ConcurrentHashMap<String, Long> accounts;
+    private final String hostIp;
 
-    public AD(ConcurrentHashMap<String, Long> accounts) {
+    public AD(ConcurrentHashMap<String, Long> accounts, String hostIp) {
         this.accounts = accounts;
+        this.hostIp = hostIp;
     }
 
     @Override
@@ -23,6 +26,11 @@ public class AD implements Command {
 
         String accountNum = parsedArgs.get("accountNum");
         String accountAmount = parsedArgs.get("amount");
+        String accountIp = parsedArgs.get("accountIp");
+
+        if (!accountIp.equals(hostIp)){
+            connectAndSendMessage(args[1]);
+        }
 
         if (!isValidAccountFormat(accountNum)) {
             return "ER Formát čísla účtu není správný.";

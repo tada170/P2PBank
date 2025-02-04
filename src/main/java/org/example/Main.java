@@ -30,7 +30,7 @@ public class Main {
         CommandRegistry registry = new CommandRegistry();
         registry.registerCommand(CommandIdentifier.BC, new BC(HOST));
         registry.registerCommand(CommandIdentifier.AC, new AC(accounts));
-        registry.registerCommand(CommandIdentifier.AD, new AD(accounts));
+        registry.registerCommand(CommandIdentifier.AD, new AD(accounts,HOST));
         registry.registerCommand(CommandIdentifier.AW, new AW(accounts));
         registry.registerCommand(CommandIdentifier.AB, new AB(accounts));
         registry.registerCommand(CommandIdentifier.AR, new AR(accounts));
