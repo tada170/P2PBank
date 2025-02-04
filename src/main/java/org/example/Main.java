@@ -42,6 +42,7 @@ public class Main {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                System.out.println("Klient se pripojil");
                 threadPool.submit(new ClientHandler(clientSocket, registry));
             }
         } catch (IOException e) {

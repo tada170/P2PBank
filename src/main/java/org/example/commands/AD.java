@@ -29,7 +29,7 @@ public class AD implements Command {
         String accountIp = parsedArgs.get("accountIp");
 
         if (!accountIp.equals(hostIp)){
-            connectAndSendMessage(args[1]);
+            return connectAndSendMessage(args[1]);
         }
 
         if (!isValidAccountFormat(accountNum)) {
