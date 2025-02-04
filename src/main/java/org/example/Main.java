@@ -31,8 +31,8 @@ public class Main {
         registry.registerCommand(CommandIdentifier.BC, new BC(HOST));
         registry.registerCommand(CommandIdentifier.AC, new AC(accounts));
         registry.registerCommand(CommandIdentifier.AD, new AD(accounts,HOST));
-        registry.registerCommand(CommandIdentifier.AW, new AW(accounts));
-        registry.registerCommand(CommandIdentifier.AB, new AB(accounts));
+        registry.registerCommand(CommandIdentifier.AW, new AW(accounts,HOST));
+        registry.registerCommand(CommandIdentifier.AB, new AB(accounts,HOST));
         registry.registerCommand(CommandIdentifier.AR, new AR(accounts));
         registry.registerCommand(CommandIdentifier.BA, new BA(accounts));
         registry.registerCommand(CommandIdentifier.BN, new BN(accounts));

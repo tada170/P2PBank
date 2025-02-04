@@ -29,15 +29,18 @@ public class AD implements Command {
         String accountIp = parsedArgs.get("accountIp");
 
         if (!accountIp.equals(hostIp)){
-            return connectAndSendMessage(args[1]);
+            String command = args[0] +" "+ args[1];
+            return connectAndSendMessage(command);
         }
 
         if (!isValidAccountFormat(accountNum)) {
             return "ER Formát čísla účtu není správný.";
         }
+
         if (!accounts.containsKey(accountNum)) {
             return "ER Účet neexistuje.";
         }
+
         if (!isValidAmount(accountAmount)) {
             return "ER Částka není ve správném formátu.";
         }

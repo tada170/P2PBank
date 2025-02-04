@@ -16,12 +16,12 @@ public class CommandRegistry {
         CommandIdentifier commandName = fromString(parts[0]);
 
         if (commandName == null) {
-            return "Neznámý příkaz.";
+            return "ER Neznámý příkaz.";
         }
 
         Command command = commands.get(commandName);
         if (command == null) {
-            return "Neznámý příkaz.";
+            return "ER Neznámý příkaz.";
         }
 
         return command.execute(parts);
