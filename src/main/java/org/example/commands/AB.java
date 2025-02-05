@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.example.Client.connectAndSendMessage;
+import static org.example.Client.sendCommand;
 import static org.example.util.CommandUtils.*;
 
 public class AB implements Command {
@@ -22,9 +22,13 @@ public class AB implements Command {
         String accountNum = parsedArgs.get("accountNum");
         String accountIp = parsedArgs.get("accountIp");
 
+        if (!isValidIp(accountIp)){
+            return "ER IP adresa není správná.";
+        }
+
         if (!accountIp.equals(hostIp)){
             String command = args[0] +" "+ args[1];
-            return connectAndSendMessage(command);
+            return sendCommand(command);
         }
         if (!isValidAccountFormat(accountNum)) {
             return "ER Formát čísla účtu není správný.";

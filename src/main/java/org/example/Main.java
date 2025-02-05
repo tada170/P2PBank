@@ -13,15 +13,13 @@ import java.util.concurrent.Executors;
 import static org.example.AccountHandler.loadAccounts;
 
 public class Main {
-    private static String HOST;
-    private static int PORT;
-    private static int POOL_SIZE;
 
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
-        HOST = dotenv.get("HOST", "127.0.0.1");
-        PORT = Integer.parseInt(dotenv.get("PORT", "65530"));
-        POOL_SIZE = Integer.parseInt(dotenv.get("POOL_SIZE", "4"));
+
+        String HOST = dotenv.get("HOST", "127.0.0.1");
+        int PORT = Integer.parseInt(dotenv.get("PORT", "65530"));
+        int POOL_SIZE = Integer.parseInt(dotenv.get("POOL_SIZE", "4"));
 
         ExecutorService threadPool = Executors.newFixedThreadPool(POOL_SIZE);
 
@@ -30,9 +28,9 @@ public class Main {
         CommandRegistry registry = new CommandRegistry();
         registry.registerCommand(CommandIdentifier.BC, new BC(HOST));
         registry.registerCommand(CommandIdentifier.AC, new AC(accounts));
-        registry.registerCommand(CommandIdentifier.AD, new AD(accounts,HOST));
-        registry.registerCommand(CommandIdentifier.AW, new AW(accounts,HOST));
-        registry.registerCommand(CommandIdentifier.AB, new AB(accounts,HOST));
+        registry.registerCommand(CommandIdentifier.AD, new AD(accounts, HOST));
+        registry.registerCommand(CommandIdentifier.AW, new AW(accounts, HOST));
+        registry.registerCommand(CommandIdentifier.AB, new AB(accounts, HOST));
         registry.registerCommand(CommandIdentifier.AR, new AR(accounts));
         registry.registerCommand(CommandIdentifier.BA, new BA(accounts));
         registry.registerCommand(CommandIdentifier.BN, new BN(accounts));

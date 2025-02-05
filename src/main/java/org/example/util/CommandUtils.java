@@ -13,14 +13,11 @@ public class CommandUtils {
     }
     public static Map<String, String> parseArgs(String input) {
         String[] parts = input.split("[/\\s]+");
-
         String accountNum = parts[0];
         String ipAddress = parts[1];
-
         Map<String, String> result = new HashMap<>();
         result.put("accountNum", accountNum);
         result.put("accountIp", ipAddress);
-
         result.put("amount", parts.length == 3 ? parts[2] : null);
 
         return result;

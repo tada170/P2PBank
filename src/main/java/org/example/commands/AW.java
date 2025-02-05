@@ -5,7 +5,7 @@ import org.example.AccountHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.example.Client.connectAndSendMessage;
+import static org.example.Client.sendCommand;
 import static org.example.util.CommandUtils.*;
 
 public class AW implements Command {
@@ -19,15 +19,24 @@ public class AW implements Command {
 
     @Override
     public String execute(String[] args) {
+        if(!isValidCommand(args[1])){
+            return "ER příkaz není zadán správně.";
+        }
+
         Map<String, String> parsedArgs = parseArgs(args[1]);
         String accountNum = parsedArgs.get("accountNum");
         String accountAmount = parsedArgs.get("amount");
         String accountIp = parsedArgs.get("accountIp");
 
+        if (!isValidIp(accountIp)){
+            return "ER IP adresa není správná.";
+        }
+
         if (!accountIp.equals(hostIp)){
             String command = args[0] +" "+ args[1];
-            return connectAndSendMessage(command);
+            return sendCommand(command);
         }
+
         if (!isValidAccountFormat(accountNum)) {
             return "ER Formát čísla účtu není správný.";
         }

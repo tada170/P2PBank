@@ -5,7 +5,7 @@ import org.example.AccountHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static org.example.Client.connectAndSendMessage;
+import static org.example.Client.sendCommand;
 import static org.example.util.CommandUtils.*;
 
 public class AD implements Command {
@@ -28,9 +28,13 @@ public class AD implements Command {
         String accountAmount = parsedArgs.get("amount");
         String accountIp = parsedArgs.get("accountIp");
 
+        if (!isValidIp(accountIp)){
+            return "ER IP adresa není správná.";
+        }
+
         if (!accountIp.equals(hostIp)){
             String command = args[0] +" "+ args[1];
-            return connectAndSendMessage(command);
+            return sendCommand(command);
         }
 
         if (!isValidAccountFormat(accountNum)) {
@@ -46,8 +50,14 @@ public class AD implements Command {
         }
 
         long amount = Long.parseLong(accountAmount);
-        accounts.put(accountNum, accounts.getOrDefault(accountNum, 0L) + amount);
+        long currentBalance = accounts.getOrDefault(accountNum, 0L);
+
+        if (amount > 0 && currentBalance > Long.MAX_VALUE - amount) {
+            return "ER Částka je příliš velká";
+        }
+        accounts.put(accountNum, currentBalance + amount);
         AccountHandler.saveAccounts(accounts);
+
         return "AD";
     }
 

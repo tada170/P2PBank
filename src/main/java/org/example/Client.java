@@ -10,10 +10,12 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class Client {
-    public static String connectAndSendMessage(String command) {
+    public static String sendCommand(String command) {
         System.out.println(command);
+
         String[] parts = command.split("/");
         String ipAddress = parts[1].split(" ")[0];
+
         for (int port = 65525; port <= 65535; port++) {
             try (Socket socket = new Socket()) {
                 socket.connect(new InetSocketAddress(ipAddress, port), 100);
@@ -23,14 +25,10 @@ public class Client {
                      InputStream input = socket.getInputStream();
                      BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
 
-                    System.out.println("Připojeno k " + ipAddress + " na portu " + port);
-
                     writer.println(command);
-                    System.out.println("Zpráva odeslána.");
 
                     String response = reader.readLine();
                     if (response != null) {
-                        System.out.println("Odpověď serveru: " + response);
                         return response;
                     }
                 }

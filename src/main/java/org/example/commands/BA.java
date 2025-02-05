@@ -12,7 +12,7 @@ public class BA implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length != 1) {
-            return "ER příkaz AC nemá argumenty";
+            return "ER příkaz BA nemá argumenty";
         }
         long total = accounts.values().stream().mapToLong(Long::longValue).sum();
 

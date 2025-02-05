@@ -21,11 +21,24 @@ public class ClientHandler implements Runnable {
 
             String input;
             while ((input = in.readLine()) != null) {
-                String response = registry.executeCommand(input);
-                out.println(response);
+                try {
+                    String response = registry.executeCommand(input);
+                    out.println(response);
+                } catch (IllegalArgumentException e) {
+                    out.println("ER Neplatný formát příkazu: " + e.getMessage());
+                } catch (Exception e) {
+                    out.println("ER Interní chyba serveru.");
+                    e.printStackTrace();
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Chyba při komunikaci s klientem: " + e.getMessage());
+        } finally {
+            try {
+                clientSocket.close();
+            } catch (IOException e) {
+                System.err.println("Chyba při uzavírání socketu klienta: " + e.getMessage());
+            }
         }
     }
 }
