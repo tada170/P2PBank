@@ -12,9 +12,8 @@ public class BN implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length != 1) {
-            return "ER Formát příkazu je nesprávný.";
+            return "ER příkaz BN nemá argumenty";
         }
-
         int clientCount = accounts.size();
 
         return "BN " + clientCount;

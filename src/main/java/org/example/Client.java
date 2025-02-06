@@ -1,5 +1,7 @@
 package org.example;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,14 +13,15 @@ import java.net.Socket;
 
 public class Client {
     public static String sendCommand(String command) {
+        Dotenv dotenv = Dotenv.load();
         System.out.println(command);
 
         String[] parts = command.split("/");
         String ipAddress = parts[1].split(" ")[0];
-
+        int time_out = Integer.parseInt(dotenv.get("TIME_OUT", "5000"));
         for (int port = 65525; port <= 65535; port++) {
             try (Socket socket = new Socket()) {
-                socket.connect(new InetSocketAddress(ipAddress, port), 100);
+                socket.connect(new InetSocketAddress(ipAddress, port), time_out);
 
                 try (OutputStream output = socket.getOutputStream();
                      PrintWriter writer = new PrintWriter(output, true);

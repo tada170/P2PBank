@@ -2,6 +2,9 @@ package org.example;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.example.commands.*;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -13,7 +16,7 @@ import java.util.concurrent.Executors;
 import static org.example.AccountHandler.loadAccounts;
 
 public class Main {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
 
@@ -36,11 +39,10 @@ public class Main {
         registry.registerCommand(CommandIdentifier.BN, new BN(accounts));
 
         try (ServerSocket serverSocket = new ServerSocket(PORT, 50, InetAddress.getByName(HOST))) {
-            System.out.println("TCP server běží na " + HOST + ":" + PORT);
-
+            logger.info("TCP server is running on: {}:{}",HOST,PORT);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Klient se pripojil");
+                logger.info("Client connected: {}", clientSocket);
                 threadPool.submit(new ClientHandler(clientSocket, registry));
             }
         } catch (IOException e) {

@@ -21,9 +21,15 @@ public class ClientHandler implements Runnable {
 
             String input;
             while ((input = in.readLine()) != null) {
+                input = input.trim();
+                if (input.isEmpty()) {
+                    continue;
+                }
                 try {
                     String response = registry.executeCommand(input);
-                    out.println(response);
+                    if (response != null && !response.isEmpty()) {
+                        out.println(response);
+                    }
                 } catch (IllegalArgumentException e) {
                     out.println("ER Neplatný formát příkazu: " + e.getMessage());
                 } catch (Exception e) {
@@ -36,9 +42,11 @@ public class ClientHandler implements Runnable {
         } finally {
             try {
                 clientSocket.close();
+                System.out.println("Klient se odpojil: " + clientSocket);
             } catch (IOException e) {
                 System.err.println("Chyba při uzavírání socketu klienta: " + e.getMessage());
             }
         }
     }
 }
+

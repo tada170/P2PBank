@@ -16,7 +16,7 @@ public class CommandRegistry {
         CommandIdentifier commandName = fromString(parts[0]);
 
         if (commandName == null) {
-            return "ER Neznámý příkaz.";
+            return "";
         }
 
         Command command = commands.get(commandName);
