@@ -17,6 +17,7 @@ import static org.example.AccountHandler.loadAccounts;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
 
@@ -39,7 +40,7 @@ public class Main {
         registry.registerCommand(CommandIdentifier.BN, new BN(accounts));
 
         try (ServerSocket serverSocket = new ServerSocket(PORT, 50, InetAddress.getByName(HOST))) {
-            logger.info("TCP server is running on: {}:{}",HOST,PORT);
+            logger.info("TCP server running on: {}:{}", HOST, PORT);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 logger.info("Client connected: {}", clientSocket);
@@ -48,6 +49,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
