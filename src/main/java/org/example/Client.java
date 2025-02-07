@@ -31,7 +31,7 @@ public class Client {
 
         String[] parts = command.split("/");
         String ipAddress = parts[1].split(" ")[0];
-        int time_out = Integer.parseInt(dotenv.get("TIME_OUT", "5000"));
+        int time_out = Integer.parseInt(dotenv.get("S_TIME_OUT", "1000"));
 
         for (int port = 65525; port <= 65535; port++) {
             try (Socket socket = new Socket()) {
