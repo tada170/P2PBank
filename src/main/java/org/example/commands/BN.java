@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import static org.example.util.CommandUtils.isValidCommand;
+
 public class BN implements Command {
     private final ConcurrentHashMap<String, Long> accounts;
     private static final Logger logger = LoggerFactory.getLogger(BN.class);

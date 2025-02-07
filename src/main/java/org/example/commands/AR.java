@@ -20,6 +20,10 @@ public class AR implements Command {
     @Override
     public String execute(String[] args) {
         logger.info("Executing AR command with arguments: {}", (Object[]) args);
+        if (args.length < 2 ||!isValidCommand(args[1])) {
+            logger.warn("AB command received with invalid arguments: {}", (Object[]) args);
+            return "ER příkaz není zadán správně.";
+        }
 
         Map<String, String> parsedArgs = parseArgs(args[1]);
         String accountNum = parsedArgs.get("accountNum");
