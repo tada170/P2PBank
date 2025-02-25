@@ -8,8 +8,8 @@ Tento projekt je implementací P2P (peer-to-peer) bankovní aplikace, která umo
 - Maven
 
 ## Instalace a spuštění
-Projekt lze spustit pomocí příkazů:
-- `java -jar P2Pbank.jar`
+Projekt lze spustit pomocí příkazů (ve složce target):
+- `java -jar \TcpServer-1.0-SNAPSHOT.jar`
 
 Konfigurace portu, IP adresy a timeoutů se provádí v souboru `.env`.
 
@@ -32,4 +32,12 @@ Konfigurace portu, IP adresy a timeoutů se provádí v souboru `.env`.
 - [GeeksforGeeks - Command Pattern](https://www.geeksforgeeks.org/command-pattern/)
 
 ## Znovupoužitý kód
-Projekt využívá návrhový vzor **Command Pattern**.
+Projekt využívá části kódu z projektu **Command Pattern**.
+
+# Testování
+
+| Tester       | Issue                                                                 | Fixed |
+|--------------|-----------------------------------------------------------------------|-------|
+| Lukáš Friedl | je možné poslat u AB a AR špatný format dat a program spadne          | Ano   |
+| Daniel Linda | jde vložit zaporná částka                                             | Ano   |
+| Daniel Linda | při posláni celého longu při AD tak bankovní účet "přeteče" do mínusu | Ano   |
